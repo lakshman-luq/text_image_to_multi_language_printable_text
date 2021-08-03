@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Text to Speech</title>
+        <link rel="stylesheet" href="{{url_for('static',filename='main.css')}}">
+        <link rel="shortcut icon" type="image/x-icon" href="static/favicon.ico"/>
+    </head>
+
+    <body>
+        
+        <h1>Upload Text Image File</h1>
+        
+        <form method=post enctype=multipart/form-data>
+          <p><input type=file name=file>
+          <p><b>Enter the language code</b> <input type=text placeholder="language code" name=text>
+            <input type=submit value=Send>
+          <p><a href="https://www.labnol.org/code/19899-google-translate-languages" target="_blank">Click here to get language codes</a></p>
+            
+        </form>
+
+        {% if msg %}
+        <h1>{{ msg }}</h1>
+        {% endif %}
+    
+        <h1>Image To Text:</h1>
+        
+        {% if extracted_text %}
+          <p><b> The extracted text from the image is: </b>{{ extracted_text }} </p>
+        
+        {% else %}
+          <b>The extracted text will be displayed here:</b>
+        {% endif %}
+
+        <h1>Text Translation:</h1>
+
+        {% if translate_text %}
+          <p><b> The translation of the above text is: </b>{{ translate_text }} </p>
+        
+        {% else %}
+          <b>The translation of the text will be displayed here:</b>
+        {% endif %}
+
+        <h1>Text To Speech:</h1>
+        {% if audio_path %}
+          <p><b>Text to speech from above text</b></p>
+
+          <audio controls="controls" preload="auto" id="audio_player">
+            <source src={{audio_path}}
+          </audio>
+
+        {% else %} 
+          <b>The audio file will be displayed here:</b>
+        {% endif %}
+        
+      </body>
+    </html>
